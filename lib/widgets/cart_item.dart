@@ -36,8 +36,26 @@ class CartItem extends StatelessWidget {
           vertical: 4,
         ),
       ),
+      confirmDismiss: (direction) {
+        print('manteup');
+        return showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            actions: [
+              FlatButton(
+                  child: Text('No'),
+                  onPressed: () => Navigator.of(ctx).pop(false)),
+              FlatButton(
+                child: Text('Yes'),
+                onPressed: () => Navigator.of(ctx).pop(true),
+              )
+            ],
+            title: Text('Do yout want to remove the item from the cart?'),
+          ),
+        );
+      },
       onDismissed: (direction) {
-        Provider.of<Cart>(context, listen: false).removeItem(productId);
+        // Provider.of<Cart>(context, listen: false).removeItem(productId);
       },
       child: Card(
         margin: EdgeInsets.symmetric(
